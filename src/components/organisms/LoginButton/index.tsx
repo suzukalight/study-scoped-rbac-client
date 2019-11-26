@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useAuth } from '../../contexts/Auth';
+import { writer1, writer2, admin } from '../../../rules/dummy-users';
 
 const Login = () => {
   const { authenticated, login, logout } = useAuth();
@@ -16,19 +17,19 @@ const Login = () => {
     <div>
       <button
         className="btn btn-sm btn-primary"
-        onClick={() => login('one@test.com', 'password', { id: '1', role: 'writer' })}
+        onClick={() => login(writer1.email, 'password', writer1)}
       >
         Writer 1 Login
       </button>
       <button
         className="btn btn-sm btn-primary"
-        onClick={() => login('two@test.com', 'password', { id: '2', role: 'writer' })}
+        onClick={() => login(writer2.email, 'password', writer2)}
       >
         Writer 2 Login
       </button>
       <button
         className="btn btn-sm btn-primary"
-        onClick={() => login('admin@test.com', 'password', { id: '999', role: 'admin' })}
+        onClick={() => login(admin.email, 'password', admin)}
       >
         Admin Login
       </button>
