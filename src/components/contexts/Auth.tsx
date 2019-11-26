@@ -3,7 +3,7 @@ import React, { useState, useContext, createContext, useCallback, useMemo } from
 const visitor: User = {
   id: '',
   email: '',
-  role: 'visitor',
+  roles: ['visitor'],
 };
 
 interface AuthContextValues {
@@ -28,9 +28,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [accessToken, setAccessToken] = useState('');
 
   const login = useCallback(
-    (email, password, { id, role }) => {
+    (email, password, user) => {
       setAuthenticated(true);
-      setUser({ id, email, role });
+      setUser(user);
       setAccessToken('1234567890abcdef1234567890abcdef');
     },
     [setAuthenticated, setUser, setAccessToken],

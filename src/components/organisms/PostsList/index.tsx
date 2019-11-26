@@ -3,21 +3,21 @@ import React from 'react';
 import Can from '../../atoms/Can';
 import { useAuth } from '../../contexts/Auth';
 
-import posts from './dummydata';
+import posts from './dummy-data';
 
-interface PostParams {
+interface PostProps {
   user: User;
   post: Post;
   index: number;
 }
 
-const Post: React.FC<PostParams> = ({ user, post, index }) => (
+const Post: React.FC<PostProps> = ({ user, post, index }) => (
   <tr>
     <th scope="row">{index + 1}</th>
     <td>{post.title}</td>
     <td>
       <Can
-        role={user.role}
+        actor={user}
         perform="posts:edit"
         data={{
           userId: user.id,
@@ -26,7 +26,7 @@ const Post: React.FC<PostParams> = ({ user, post, index }) => (
       >
         <button>Edit Post</button>
       </Can>
-      <Can role={user.role} perform="posts:delete">
+      <Can actor={user} perform="posts:delete">
         <button>Delete Post</button>
       </Can>
     </td>

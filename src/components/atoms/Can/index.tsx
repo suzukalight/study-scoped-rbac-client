@@ -1,23 +1,18 @@
-import { check } from '../../../check';
-import rules from '../../../rbac-rules';
+import { check } from '../../../rules/check';
+import rules from '../../../rules/rbac';
 
 interface CanParams {
-  role: string;
+  actor: User;
   perform: string;
   data?: Object;
   yes?: Function;
   no?: Function;
 }
 
-const Can: React.FC<CanParams> = ({
-  children,
-  role,
-  perform,
-  data,
-  yes,
-  no = () => null,
-}) => {
-  if (!check(rules, role, perform, data)) return no();
+const Can: React.FC<CanParams> = ({ children, actor, perform, data, yes, no = () => null }) => {
+  const roles = [...(actor.roles || [])];
+  const can = roles.some(role => check(rules, role, perform, data));
+  if (!can) return no();
   if (yes) return yes();
   return children;
 };
