@@ -17,6 +17,7 @@ const Post: React.FC<PostProps> = ({ user, post, index }) => (
     <td>{post.title}</td>
     <td>
       <Can
+        target={post.team}
         actor={user}
         perform="posts:edit"
         data={{
@@ -26,7 +27,7 @@ const Post: React.FC<PostProps> = ({ user, post, index }) => (
       >
         <button>Edit Post</button>
       </Can>
-      <Can actor={user} perform="posts:delete">
+      <Can target={post} actor={user} perform="posts:delete">
         <button>Delete Post</button>
       </Can>
     </td>

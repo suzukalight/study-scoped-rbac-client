@@ -16,10 +16,11 @@ export const writer2: User = {
   team: team1,
 };
 
-export const writer3: User = {
+export const manager: User = {
   id: '3',
   roles: ['writer'],
   email: 'three@test.com',
+  scopedRoles: [{ role: 'writer', scopes: [{ sourceType: 'team', sourceId: '1' }] }],
 };
 
 export const admin: User = {

@@ -6,7 +6,7 @@ interface PostsEditParams {
 export interface UserRule {
   static?: string[];
   dynamic?: {
-    [key: string]: Function;
+    [key: string]: (target: any, actor: User, data?: any) => boolean;
   };
 }
 
@@ -27,9 +27,10 @@ const rules: Rule = {
       'dashboard-page:visit',
     ],
     dynamic: {
-      'posts:edit': ({ userId, postOwnerId }: PostsEditParams) => {
-        if (!userId || !postOwnerId) return false;
-        return userId === postOwnerId;
+      'posts:edit': (target, actor) => {
+        const post = target as Post;
+        if (!actor.id || !post.ownerId) return false;
+        return actor.id === post.ownerId;
       },
     },
   },

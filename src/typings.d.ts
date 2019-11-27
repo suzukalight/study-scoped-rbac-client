@@ -14,6 +14,7 @@ interface Post {
   id: string;
   title: string;
   ownerId: string;
+  team: Team;
 }
 
 type Operation = string;
@@ -37,6 +38,8 @@ interface Scope {
 }
 
 interface ScopedRole {
-  role: Role;
+  role: RoleKey;
   scopes: Scope[];
 }
+
+type Target = Team;
